@@ -11,6 +11,7 @@ CTestTestfile.cmake
 _deps
 CMakeUserPresets.json
 third_party/fmt
+build
 
 # CLion
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
