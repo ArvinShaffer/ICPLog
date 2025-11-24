@@ -15,7 +15,7 @@ struct source_loc {
 
     constexpr bool empty() const noexcept { return line == 0; }
 
-    const char* finename{ nullptr};
+    const char* filename{ nullptr};
     int line{0};
     const char* funcname{nullptr};
 };
