@@ -18,17 +18,11 @@ protected:
     void sink_it_(const details::log_msg& msg) override {
         // simple implementation: direct output to stdout
         // format: [time] [level] message content
+        fmt::memory_buffer formatted;
+        this->format_message(msg, formatted);
 
-        // format time
-        std::string time_str = details::format_time(msg.time, "%Y-%m-%d %H:%M:%S");
-
-        // get level string
-        const char* level_str = level_to_short_string(msg.lvl);
-
-        // output format: [2025-11-14 16:53:45] [l] Hello World
-        std::cout << "[" << time_str << "] "
-                  << "[" << level_str << "] "
-                  << msg.payload << std::endl;
+        // output to stdout
+        std::cout.write(formatted.data(), formatted.size());
     }
 
     void flush_() override {
@@ -51,12 +45,10 @@ public:
 
 protected:
     void sink_it_(const details::log_msg& msg) override {
-        std::string time_str = details::format_time(msg.time, "%Y-%m-%d %H:%M:%S");
-        const char* level_str = level_to_short_string(msg.lvl);
+        fmt::memory_buffer formatted;
+        this->format_message(msg, formatted);
 
-        std::cerr << "[" << time_str << "] "
-                  << "[" << level_str << "] "
-                  << msg.payload << std::endl;
+        std::cerr.write(formatted.data(), formatted.size());
     }
 
     void flush_() override {

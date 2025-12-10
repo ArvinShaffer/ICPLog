@@ -1,5 +1,7 @@
 set(ICPLOG_SOURCES
     level.cpp 
+    formatter.cpp 
+    pattern_formatter.cpp 
     details/utils.cpp
 )
 
